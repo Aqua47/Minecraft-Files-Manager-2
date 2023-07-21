@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import mfm.run.Jf;
 import mfm.tools.Tools;
 
 public class Logs {
@@ -12,17 +13,19 @@ public class Logs {
 		long startTime = System.nanoTime();
 		String mfm;
 		if (serv) {
-			mfm = "MFM\\logs\\server\\";
+			mfm = "MFM"+Jf.slash+"logs"+Jf.slash+"server"+Jf.slash;
 		}
 		else {
-			mfm = "MFM\\logs\\game\\";
+			mfm = "MFM"+Jf.slash+"logs"+Jf.slash+"game"+Jf.slash;
 		}
 		
 		//delete logs files to replace it
 		Delete.main("4", serv);
 		//create 7z.bat
-		Tools.write7z("temp\\7z_Logs.bat", "color 2\n\"C:\\Program Files\\7-Zip\\7z.exe\" e \""+location+"\\logs\\*.gz\" -o\""+mfm+"\"\nexit");
-		Tools.run7z("temp\\7z_Logs.bat");
+		//Tools.write7z("temp"+Jf.slash+"7z_Logs.bat", "7z e \""+location+Jf.slash+"logs"+Jf.slash+"*.gz\" -o \""+mfm+"\"\nexit");
+		Tools.write7z("temp"+Jf.slash+"7z_Logs.bat", "7z e \""+location+Jf.slash+"logs"+Jf.slash+"*.gz\" -o\""+mfm+"\"\nexit");
+		Tools.write7z("temp"+Jf.slash+"7z_Logs.bat", "7z e \""+location+Jf.slash+"logs"+Jf.slash+"*.gz\" -o\""+mfm+"\"\nexit");
+		Tools.run7z("temp"+Jf.slash+"7z_Logs.bat");
 		
 		int timeLog = 0;
 		int logNb = 0;

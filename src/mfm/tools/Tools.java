@@ -25,15 +25,6 @@ public class Tools {
 		return var;
 	}
 	
-	public static boolean ifStringInArray(String target, String[] array) {
-		for (String s : array) {
-			if (s.equals(target)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	//available
 	
 	public static String[] available (String in) {
@@ -48,6 +39,7 @@ public class Tools {
 	
 	public static void write7z(String name, String txt) throws IOException{
 		new File("temp").mkdirs();
+		new File(name).setExecutable(true);
 		FileWriter write7z = new FileWriter(name);
 		write7z.write(txt);
 		write7z.close();
@@ -55,7 +47,12 @@ public class Tools {
 	
 	public static void run7z(String in) throws InterruptedException, IOException {
 		try {
-			Process gz = Runtime.getRuntime().exec("cmd /C start /wait "+in);
+			Process gz;
+			if (Jf.linux) {
+				gz = Runtime.getRuntime().exec(in);
+			} else {
+				gz = Runtime.getRuntime().exec("cmd /C start /wait "+in);
+			}
 			gz.waitFor();
 		} catch (IOException e) {
 			e.printStackTrace();

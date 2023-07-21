@@ -6,69 +6,70 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import mfm.tools.*;
+import mfm.run.Jf;
+import mfm.tools.Tools;
 
-public class Indexes {
-	public static void main(String min, String ver) throws IOException {
-		new File("MFM\\indexes\\").mkdirs();
-		String[] pathnamesP1 = {};
-		if (Tools.nothing(ver)) {
-			pathnamesP1 = Tools.available(min+"\\assets\\indexes");
-			ver = Tools.scan();
+public class Indexes extends Thread {
+	
+	private String _ver;
+	
+	public Indexes(String ver) {
+		_ver = ver;
+	}
+
+	@Override
+	public void run() {
+		new File("MFM"+Jf.slash+"indexes"+Jf.slash).mkdirs();
+		String[] indexes = Tools.available(Jf.min+Jf.slash+"assets"+Jf.slash+"indexes");
+		if (Tools.nothing(_ver)) {
+			_ver = Tools.scan();
 		}
-		else {
-			pathnamesP1 = Tools.available(min+"\\assets\\indexes");
+		byte indexe = -1;
+		int nbIndexes = 0;
+		if (_ver.matches("all|a")) {
+			indexe = 0;
+			_ver = (indexes[indexe]);
+			nbIndexes = indexes.length;
 		}
-		if (ver != "0") {
-			byte a = -1;
-			int p = pathnamesP1.length;
-			if (ver.matches("all|a")) {
-				a = 0;
+		while(nbIndexes != indexe) {
+			long startTime = System.nanoTime();
+			if (indexe != -1) {
+				_ver = (indexes[indexe]);
 			}
-			else {
-				//ver = ver+".json";
-				p = 0;
-			}
-			if (a != -1) {
-				ver = (pathnamesP1[a]);
-			}
-			while(p != a) {
-				long startTime = System.nanoTime();
-				//Print.bar();
-				if (a != -1) {
-					ver = (pathnamesP1[a]);
-				}
-				a++;
-				FileInputStream fin = null;
-				if (new File(min+"\\assets\\indexes\\"+ver).exists()) {
-					fin = new FileInputStream(min+"\\assets\\indexes\\"+ver);	
-					File out = new File("MFM\\indexes\\"+ver);
-					FileWriter fw = new FileWriter(out);
+			indexe++;
+			if (new File(Jf.min+Jf.slash+"assets"+Jf.slash+"indexes"+Jf.slash+_ver).exists()) {
+				FileInputStream fin;
+				File out = new File("MFM"+Jf.slash+"indexes"+Jf.slash+_ver);
+				FileWriter fw;
+				try {
+					fin = new FileInputStream(Jf.min+Jf.slash+"assets"+Jf.slash+"indexes"+Jf.slash+_ver);
+					fw = new FileWriter(out);
 					PrintWriter pw = new PrintWriter(fw);
-					char cd;
-					byte vir = 0;
-					if (ver.equals("pre-1.6.json")) {
-						vir = -1;
-					}					
+					byte comma = 0;
+					if (_ver.equals("pre-1.6.json")) {
+						comma = -1;
+					}
+				
 					//indexes decoder loop
-					int ci;
-					for (ci = fin.read(); ci!=-1; ci = fin.read()) {
-						cd = (char)ci;
+					char cd;
+					for (cd = (char) fin.read(); cd != 65535; cd = (char) fin.read()) {
 						pw.print(cd);
 						if (cd == ',') {
-							vir++;
-							if (vir==2) {
-								vir = 0;
+							comma++;
+							if (comma==2) {
+								comma = 0;
 								pw.println();
 							}
 						}
 					}
 					fw.close();
+					pw.close();
 					fin.close();
-					Tools.print("indexes "+ver+" created");
-				}
-				Tools.time(startTime);
+				} catch (IOException e) { e.printStackTrace(); }
+				Tools.print("indexes "+_ver+" created");
 			}
+			Tools.time(startTime);
+			System.gc();
 		}
 	}
 }
