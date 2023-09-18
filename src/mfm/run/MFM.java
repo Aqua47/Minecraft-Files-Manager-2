@@ -242,7 +242,7 @@ public class MFM extends JFrame implements ActionListener{
 		
 		for (int i = 0; i != len; i++) {
 			//show if indexes exists
-			if (objectsSel != null && ifStringInArray(indexesSel[i],objectsSel)) {
+			if (objectsSel != null && Tools.ifStringInArray(indexesSel[i],objectsSel)) {
 				objects.addItem(indexesSel[i]+" (T)");	
 			} else {
 				objects.addItem(indexesSel[i]+" (F)");
@@ -271,13 +271,5 @@ public class MFM extends JFrame implements ActionListener{
 		
 	}
 	
-	private static boolean ifStringInArray(String target, String[] array) {
-		for (String s : array) {
-			if (s.equals(target)) {
-				return true;
-			}
-		}
-		return false;
-	}
 	
 }

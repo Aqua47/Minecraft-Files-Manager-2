@@ -96,7 +96,7 @@ public class Old {
 		}
 	}
 	
-	private static void size(long bytes) {
+	private static void size(long bytes) throws IOException {
 		Tools.print(bytes/1024+" ko");
 	}
 }

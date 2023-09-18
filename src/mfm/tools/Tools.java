@@ -26,17 +26,22 @@ public class Tools {
 		return var;
 	}
 	
+	public static boolean ifStringInArray(String target, String[] array) {
+		for (String s : array) {
+			if (s.equals(target)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	//available
 	
 	public static String[] available (String in) {
 		String[] pathnamesP1;
 		File fav = new File(in);
 		pathnamesP1 = fav.list();
-		for (@SuppressWarnings("unused") String pathnameP1 : pathnamesP1) {
-			if (pathnameP1.equals("mfmLogs")) {
-				
-			}
-		}
+		for (@SuppressWarnings("unused") String pathnameP1 : pathnamesP1) {}
 		return pathnamesP1;
 	}
 	
@@ -68,12 +73,13 @@ public class Tools {
 	
 	//print
 	
-	public static void print(String s) {
+	public static void print(String s) throws IOException {
 		System.out.println(s);
 		MFM.print.append(s+"\n");
+		printLog(s);
 	}
 	
-	public static void time(float startTime) {
+	public static void time(float startTime) throws IOException {
 		float elapsedTime = ((System.nanoTime() - startTime));
 		float m = (Math.round(elapsedTime/100000));
 		Tools.print((m/10000)+" second");
