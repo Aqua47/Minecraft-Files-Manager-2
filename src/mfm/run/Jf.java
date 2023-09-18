@@ -30,11 +30,11 @@ public class Jf extends JFrame implements ActionListener{
 	
 	private static final String version = "2.1";
 	
-	public static final boolean linux;
+	public static final boolean linux = Cmd.linux;
 	
-	public static final String slash;
+	public static final String slash = Cmd.slash;
 	
-	public static final String min;
+	public static final String min = Cmd.min;
 	
 	private static final String run = System.getProperty("user.dir");
 	
@@ -55,50 +55,6 @@ public class Jf extends JFrame implements ActionListener{
 	
 	public static JTextArea print = new JTextArea(10, 30);
 	public static JScrollPane scrollPane = new JScrollPane(print);
-	
-	static {
-		if (System.getProperty("os.name").toLowerCase().substring(0,3).equals("win")) {
-			min = "C:\\Users\\"+System.getProperty("user.name")+"\\AppData\\Roaming\\.minecraft";
-			linux = false;
-		} else {
-			min = "/home/"+System.getProperty("user.name")+"/.minecraft";
-			linux = true;
-		}
-		if (linux) {
-			slash = "/";
-		} else {
-			slash = "\\";
-		}
-	}
-	
-	public static void main(String[] args) throws IOException, InterruptedException {
-		if (args.length == 0) {
-			new Jf();
-		} else {
-			if (args[0] == "help") {
-				
-			} else if (args[0] == "indexes") {
-				new Indexes(args[1]).start();
-			} else if (args[0] == "objects") {
-				Objects.main(args[1]);
-			} else if (args[0] == "old") {
-				
-			} else if (args[0] == "logs") {
-				Logs.main(min, false);
-			} else if (args[0] == "backup") {
-				Backup.main(min, "all", false);
-			} else if (args[0] == "delete") {
-				Delete.main("all", false);
-			} else if (args[0] == "folder") {
-				
-			} else if (args[0] == "servloc") {
-				
-			} else if (args[0] == "version"){
-				System.out.println(version);
-			}
-		}
-	}
-	
 	
 	public Jf() {
 		super("Minecraft Files Manager "+version);
