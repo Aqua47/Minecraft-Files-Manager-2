@@ -4,25 +4,27 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import mfm.function.Backup;
-import mfm.function.Delete;
-import mfm.function.Indexes;
-import mfm.function.Logs;
-import mfm.function.Objects;
+import mfm.functions.Backup;
+import mfm.functions.Delete;
+import mfm.functions.Indexes;
+import mfm.functions.Logs;
+import mfm.functions.Objects;
 
-public class Cmd {
+public class Main {
 	
-	private static final String version = "2.1";
+	static final String version = "2.1";
 	
 	public static final boolean linux;
 	
-	public static final String slash;
+	public static final String s; //slash
 	
 	public static final String min;
 	
-	private static final String run = System.getProperty("user.dir");
+	static final String run = System.getProperty("user.dir");
 	
 	public static final String date;
+	
+	static String servLoc;
 	
 	static {
 		if (System.getProperty("os.name").toLowerCase().substring(0,3).equals("win")) {
@@ -33,9 +35,9 @@ public class Cmd {
 			linux = true;
 		}
 		if (linux) {
-			slash = "/";
+			s = "/";
 		} else {
-			slash = "\\";
+			s = "\\";
 		}
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");  
 		LocalDateTime now = LocalDateTime.now();  
@@ -44,14 +46,14 @@ public class Cmd {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		if (args.length == 0) {
-			new Jf();
+			new MFM();
 		} else {
 			if (args[0] == "help") {
 				
 			} else if (args[0].equals("indexes")) {
-				new Indexes(args[1]).start();
+				new Indexes(args[1]).createIndexe();
 			} else if (args[0].equals("objects")) {
-				Objects.main(args[1]);
+				new Objects(args[1]).createObject();
 			} else if (args[0].equals("old")) {
 				
 			} else if (args[0].equals("logs")) {

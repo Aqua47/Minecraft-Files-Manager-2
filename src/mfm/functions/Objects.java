@@ -1,4 +1,4 @@
-package mfm.function;
+package mfm.functions;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,56 +11,60 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import mfm.run.Jf;
+import mfm.run.Main;
 import mfm.tools.Tools;
 
-public class Objects {
+public class Objects extends Function {
+	
+	public Objects(String ver) {
+		super(ver);
+	}
 
-	public static void main(String ver) throws IOException, InterruptedException {		
+	public void createObject() throws IOException, InterruptedException {		
 		boolean all = false;
 		String fileOut = "";
-		String[] indexes = Tools.available(Jf.min+Jf.slash+"assets"+Jf.slash+"indexes");
-		if (Tools.nothing(ver)) {
-			ver = Tools.scan();
+		String[] indexes = Tools.available(Main.min+Main.s+"assets"+Main.s+"indexes");
+		if (Tools.nothing(_ver)) {
+			_ver = Tools.scan();
 		}
-		if (ver != "0") {
+		if (_ver != "0") {
 			long startTime = System.nanoTime();
-			String verjson = ver;
+			String verjson = _ver;
 			byte a = -1;
 			int nbIndexes = 0;
-			if (ver.matches("all|a")) {
+			if (_ver.matches("all|a")) {
 				a = 0;
 				all = true;
 				nbIndexes = indexes.length;
 			}
 			if (a != -1) {
 				verjson = (indexes[a]);
-				ver = Tools.removeLast(verjson,5);
+				_ver = Tools.removeLast(verjson,5);
 			}
 			while(nbIndexes != a) {
 				byte pl = 0;
 				if (a != -1) {
 					verjson = (indexes[a]);
-					ver = Tools.removeLast(verjson,5);
+					_ver = Tools.removeLast(verjson,5);
 				}
 				a++;
-				new File("MFM"+Jf.slash+"objects").mkdirs();
-				Path indexe = Paths.get("MFM"+Jf.slash+"indexes"+Jf.slash+verjson);
-				Tools.print(ver);
+				new File("MFM"+Main.s+"objects").mkdirs();
+				Path indexe = Paths.get("MFM"+Main.s+"indexes"+Main.s+verjson);
+				Tools.print(_ver);
 				if (!Files.exists(indexe)) {
 					Indexes Indexes1;
 					if (all) {
-						Indexes1 = new Indexes(ver+".json");
+						Indexes1 = new Indexes(_ver+".json");
 					} else {
-						Indexes1 = new Indexes(ver);
+						Indexes1 = new Indexes(_ver);
 					}
-					Indexes1.start();
+					Indexes1.createIndexe();
 					//wait
 					Thread.sleep(1000);
 					System.gc();
 				}
 				//Print.bar();
-				FileInputStream lec = new FileInputStream("MFM"+Jf.slash+"indexes"+Jf.slash+verjson); //TODO bug
+				FileInputStream lec = new FileInputStream("MFM"+Main.s+"indexes"+Main.s+verjson); //TODO bug
 				List<Character> ca = new ArrayList<Character> ();
 				for (short ca80 = 0; ca80 != 80; ca80++) {
 					ca.add(' ');
@@ -74,7 +78,7 @@ public class Objects {
 				byte getadd = -1;
 				byte h = 0;
 				//%
-				BufferedReader br = new BufferedReader(new FileReader("MFM"+Jf.slash+"indexes"+Jf.slash+verjson));
+				BufferedReader br = new BufferedReader(new FileReader("MFM"+Main.s+"indexes"+Main.s+verjson));
 				int allLine = 0;			
 				while (br.readLine() != null) {
 					allLine++;
@@ -102,14 +106,14 @@ public class Objects {
 						}
 						if (h==1) {
 							cc2 = cc;
-							File nfp = new File("MFM"+Jf.slash+"objects"+Jf.slash+ver+Jf.slash+cc2);
-							fileOut = "MFM/objects/"+ver+"/"+cc2.substring(0, cc2.length() - nfp.getName().length())+nfp.getName();
+							File nfp = new File("MFM"+Main.s+"objects"+Main.s+_ver+Main.s+cc2);
+							fileOut = "MFM/objects/"+_ver+"/"+cc2.substring(0, cc2.length() - nfp.getName().length())+nfp.getName();
 							File nf = new File(fileOut);
 							nf.mkdirs();
 						}
 						if (h==2) {
 							h = 0;
-							Path source = Paths.get(Jf.min+Jf.slash+"assets"+Jf.slash+"objects"+Jf.slash+cc.substring(0,2)+Jf.slash+cc);
+							Path source = Paths.get(Main.min+Main.s+"assets"+Main.s+"objects"+Main.s+cc.substring(0,2)+Main.s+cc);
 							Path dest = Paths.get(fileOut);
 							Files.deleteIfExists(dest);
 							Files.copy(source, dest);

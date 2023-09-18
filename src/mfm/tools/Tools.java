@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import mfm.run.Cmd;
-import mfm.run.Jf;
+import mfm.run.Main;
+import mfm.run.MFM;
 
 public class Tools {
 	
@@ -53,7 +53,7 @@ public class Tools {
 	public static void run7z(String in) throws InterruptedException, IOException {
 		try {
 			Process gz;
-			if (Jf.linux) {
+			if (Main.linux) {
 				gz = Runtime.getRuntime().exec(in);
 			} else {
 				gz = Runtime.getRuntime().exec("cmd /C start /wait "+in);
@@ -70,7 +70,7 @@ public class Tools {
 	
 	public static void print(String s) {
 		System.out.println(s);
-		Jf.print.append(s+"\n");
+		MFM.print.append(s+"\n");
 	}
 	
 	public static void time(float startTime) {
@@ -83,7 +83,7 @@ public class Tools {
 	//MFMlogs
 	public static void printLog(String s) throws IOException {
 		new File("MFMLogs\\").mkdirs();
-		FileWriter fw = new FileWriter("MFMLogs\\"+Cmd.date+".txt",true);
+		FileWriter fw = new FileWriter("MFMLogs\\"+Main.date+".txt",true);
 		fw.append(s+"\n");
 		fw.close();
 	}

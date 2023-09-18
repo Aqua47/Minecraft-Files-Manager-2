@@ -1,31 +1,38 @@
-package mfm.function;
+package mfm.functions;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import mfm.run.Jf;
+import mfm.run.Main;
 import mfm.tools.Tools;
 
-public class Logs {
+public class Logs extends Function {
+	
+	public Logs(String location, boolean serv) {
+		super(location, serv);
+	}
+	
+	
+	
 	public static void main(String location, boolean serv) throws IOException, InterruptedException {
 		long startTime = System.nanoTime();
 		String mfm;
 		if (serv) {
-			mfm = "MFM"+Jf.slash+"logs"+Jf.slash+"server"+Jf.slash;
+			mfm = "MFM"+Main.s+"logs"+Main.s+"server"+Main.s;
 		}
 		else {
-			mfm = "MFM"+Jf.slash+"logs"+Jf.slash+"game"+Jf.slash;
+			mfm = "MFM"+Main.s+"logs"+Main.s+"game"+Main.s;
 		}
 		
 		//delete logs files to replace it
 		Delete.main("4", serv);
 		//create 7z.bat
-		//Tools.write7z("temp"+Jf.slash+"7z_Logs.bat", "7z e \""+location+Jf.slash+"logs"+Jf.slash+"*.gz\" -o \""+mfm+"\"\nexit");
-		Tools.write7z("temp"+Jf.slash+"7z_Logs.bat", "7z e \""+location+Jf.slash+"logs"+Jf.slash+"*.gz\" -o\""+mfm+"\"\nexit");
-		Tools.write7z("temp"+Jf.slash+"7z_Logs.bat", "7z e \""+location+Jf.slash+"logs"+Jf.slash+"*.gz\" -o\""+mfm+"\"\nexit");
-		Tools.run7z("temp"+Jf.slash+"7z_Logs.bat");
+		//Tools.write7z("temp"+Cmd.s+"7z_Logs.bat", "7z e \""+location+Cmd.s+"logs"+Cmd.s+"*.gz\" -o \""+mfm+"\"\nexit");
+		Tools.write7z("temp"+Main.s+"7z_Logs.bat", "7z e \""+location+Main.s+"logs"+Main.s+"*.gz\" -o\""+mfm+"\"\nexit");
+		Tools.write7z("temp"+Main.s+"7z_Logs.bat", "7z e \""+location+Main.s+"logs"+Main.s+"*.gz\" -o\""+mfm+"\"\nexit");
+		Tools.run7z("temp"+Main.s+"7z_Logs.bat");
 		
 		int timeLog = 0;
 		int logNb = 0;

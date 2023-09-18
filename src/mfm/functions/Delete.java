@@ -1,4 +1,4 @@
-package mfm.function;
+package mfm.functions;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,10 +7,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 
-import mfm.run.Jf;
+import mfm.run.Main;
 import mfm.tools.*;
 
-public class Delete {
+public class Delete extends Function {
+	
+	public Delete(String com, boolean serv) {
+		super(com, serv);
+	}
+	
 	public static void main(String com, boolean serv) throws IOException {
 		String scan = "all";
 		//if it's for server; change the value
@@ -35,36 +40,36 @@ public class Delete {
 				deleteAll(mfms,null);
 			}
 			else if (com.matches("1|ind|indexe|indexes")) {	
-				Tools.available(mfms+Jf.slash+"indexes");
+				Tools.available(mfms+Main.s+"indexes");
 				//String scan = Tools.scan();
 				if (scan.matches("a|all")) {
-					deleteAll(mfms+Jf.slash+"indexes",null);
+					deleteAll(mfms+Main.s+"indexes",null);
 				} else {
-					deleteAll(mfms+Jf.slash+"indexes"+Jf.slash+scan,null);
+					deleteAll(mfms+Main.s+"indexes"+Main.s+scan,null);
 				}
 			}
 			else if (com.matches("2|obj|object|objects")) {
-				Tools.available(mfms+Jf.slash+"objects");
+				Tools.available(mfms+Main.s+"objects");
 				//String scan = Tools.scan();
 				if (scan.matches("a|all")) {
-					deleteAll(mfms+Jf.slash+"objects",null);
+					deleteAll(mfms+Main.s+"objects",null);
 				} else {
-					deleteAll(mfms+Jf.slash+"objects"+Jf.slash+scan,null);
+					deleteAll(mfms+Main.s+"objects"+Main.s+scan,null);
 				}
 			}
 			else if (com.matches("4|logs")) {
-				deleteAll(mfms+Jf.slash+"logs",null);
+				deleteAll(mfms+Main.s+"logs",null);
 			}
 			else if (com.matches("6|backup")) {
-				Tools.available(mfms+Jf.slash+"backup");
+				Tools.available(mfms+Main.s+"backup");
 				//String scan = Tools.scan();
 				if (scan.matches("a|all")) {
-					deleteAll(mfms+Jf.slash+"backup",null);
+					deleteAll(mfms+Main.s+"backup",null);
 				} else {
 					if (!scan.endsWith(".7z")) {
 						scan = scan+".7z";
 					}
-					deleteFile(mfms+Jf.slash+"backup"+Jf.slash+scan);
+					deleteFile(mfms+Main.s+"backup"+Main.s+scan);
 				}
 			}
 			else {

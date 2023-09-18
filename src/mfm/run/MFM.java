@@ -20,25 +20,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import mfm.function.*;
+import mfm.functions.*;
 import mfm.tools.*;
 
 
-public class Jf extends JFrame implements ActionListener{
+public class MFM extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 2L;
-	
-	private static final String version = "2.1";
-	
-	public static final boolean linux = Cmd.linux;
-	
-	public static final String slash = Cmd.slash;
-	
-	public static final String min = Cmd.min;
-	
-	private static final String run = System.getProperty("user.dir");
-	
-	private static String servLoc;
 		
 	private static String[] indexesSel, objectsSel, deleteSel, oldSel;
 	private static String[] logsSel = {"game", "server"};
@@ -56,8 +44,8 @@ public class Jf extends JFrame implements ActionListener{
 	public static JTextArea print = new JTextArea(10, 30);
 	public static JScrollPane scrollPane = new JScrollPane(print);
 	
-	public Jf() {
-		super("Minecraft Files Manager "+version);
+	public MFM() {
+		super("Minecraft Files Manager "+Main.version);
 		
 		JLabel background = new JLabel();
         background.setIcon(new ImageIcon(".jpg"));
@@ -174,13 +162,13 @@ public class Jf extends JFrame implements ActionListener{
 				dispose();
 			} else if (event.getSource() == indexesButton) {
 				sel = (String) indexes.getSelectedItem();
-				new Indexes(sel).start();
+				new Indexes(sel).createIndexe();
 			} else if (event.getSource() == objectsButton) {
 				sel = (String) objects.getSelectedItem();
 				if (sel != "all") {
 					sel = Tools.removeLast(sel, 4);
 				}
-				Objects.main(sel);
+				new Objects(sel).createObject();
 			} else if (event.getSource() == oldButton) {
 				sel = (String) old.getSelectedItem();
 				System.out.println(sel);
@@ -188,23 +176,23 @@ public class Jf extends JFrame implements ActionListener{
 			} else if (event.getSource() == logsButton) {
 				sel = (String) logs.getSelectedItem();
         		if (sel == "game") {
-        			Logs.main(min, false);
+        			Logs.main(Main.min, false);
         		} else if (sel == "server") {
-        			Logs.main(servLoc, true);
+        			Logs.main(Main.servLoc, true);
         		}
 			} else if (event.getSource() == backupButton) {
 				sel = (String) backup.getSelectedItem();
 				if (sel == "game") {
-					Backup.main(min, "all", false);
+					Backup.main(Main.min, "all", false);
 				} else if (sel == "server") {
-					Backup.main(servLoc, "all", true);
+					Backup.main(Main.servLoc, "all", true);
 				}				
 			} else if (event.getSource() == deleteButton) {
 				sel = (String) delete.getSelectedItem();
 				Delete.main(sel, false);
 			} else if (event.getSource() == servButton) {
 				sel = (String) serv.getText();
-				FileWriter servWriter = new FileWriter(run+slash+"serv location.txt");
+				FileWriter servWriter = new FileWriter(Main.run+Main.s+"serv location.txt");
 				servWriter.write(sel);
 				Tools.print("serv location updated to : "+sel);
 				servWriter.close();
@@ -224,7 +212,7 @@ public class Jf extends JFrame implements ActionListener{
 		try {
 			floc.createNewFile();
 			br = new BufferedReader(new FileReader(floc));
-			servLoc = br.readLine();
+			Main.servLoc = br.readLine();
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -232,14 +220,14 @@ public class Jf extends JFrame implements ActionListener{
 		
 		//new File("MFM").mkdirs();
 		
-		indexesSel = Tools.available(min+slash+"assets"+slash+"indexes");
-		if (new File("MFM"+slash+"indexes").exists()) { //if file in the folder 
-			objectsSel = Tools.available("MFM"+slash+"indexes");
+		indexesSel = Tools.available(Main.min+Main.s+"assets"+Main.s+"indexes");
+		if (new File("MFM"+Main.s+"indexes").exists()) { //if file in the folder 
+			objectsSel = Tools.available("MFM"+Main.s+"indexes");
 		} else {
 			objectsSel = null;
 		}
 		deleteSel = Tools.available("MFM");
-		oldSel = Tools.available(min+slash+"versions");
+		oldSel = Tools.available(Main.min+Main.s+"versions");
 		
 		
 		indexes.removeAllItems();
@@ -279,7 +267,7 @@ public class Jf extends JFrame implements ActionListener{
 		}
 		old.addItem("all");
 		
-		serv.setText(servLoc);
+		serv.setText(Main.servLoc);
 		
 	}
 	
