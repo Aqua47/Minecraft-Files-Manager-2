@@ -1,6 +1,8 @@
 package mfm.run;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import mfm.function.Backup;
 import mfm.function.Delete;
@@ -20,6 +22,8 @@ public class Cmd {
 	
 	private static final String run = System.getProperty("user.dir");
 	
+	public static final String date;
+	
 	static {
 		if (System.getProperty("os.name").toLowerCase().substring(0,3).equals("win")) {
 			min = "C:\\Users\\"+System.getProperty("user.name")+"\\AppData\\Roaming\\.minecraft";
@@ -33,6 +37,9 @@ public class Cmd {
 		} else {
 			slash = "\\";
 		}
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		date = dtf.format(now);
 	}
 
 	public static void main(String[] args) throws IOException, InterruptedException {
@@ -59,6 +66,8 @@ public class Cmd {
 				
 			} else if (args[0].equals("version")){
 				System.out.println(version);
+			} else {
+				//help
 			}
 		}
 	}

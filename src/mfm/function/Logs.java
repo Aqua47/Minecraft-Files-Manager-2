@@ -53,7 +53,7 @@ public class Logs {
 					time = time+86400;
 				}
 				timeLog = timeLog+time;
-				Tools.print(logs[logNb]+"  second: "+time);
+				Tools.printLog(logs[logNb]+"  second: "+time);
 			}
 			logNb++;
 			repeatLog--;
@@ -79,7 +79,7 @@ public class Logs {
 		return seconds;
 	}
 	
-	public static int[] timePlay(int timeLog) {
+	public static int[] timePlay(int timeLog) throws IOException {
 		Tools.print("all seconds: "+timeLog);
 		int minutes = timeLog/60;
 		timeLog = timeLog-(minutes*60);

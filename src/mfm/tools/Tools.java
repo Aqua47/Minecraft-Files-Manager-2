@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import mfm.run.Cmd;
 import mfm.run.Jf;
 
 public class Tools {
@@ -31,7 +32,11 @@ public class Tools {
 		String[] pathnamesP1;
 		File fav = new File(in);
 		pathnamesP1 = fav.list();
-		for (@SuppressWarnings("unused") String pathnameP1 : pathnamesP1) {}
+		for (@SuppressWarnings("unused") String pathnameP1 : pathnamesP1) {
+			if (pathnameP1.equals("mfmLogs")) {
+				
+			}
+		}
 		return pathnamesP1;
 	}
 	
@@ -75,5 +80,12 @@ public class Tools {
 	}
 	
 	
+	//MFMlogs
+	public static void printLog(String s) throws IOException {
+		new File("MFMLogs\\").mkdirs();
+		FileWriter fw = new FileWriter("MFMLogs\\"+Cmd.date+".txt",true);
+		fw.append(s+"\n");
+		fw.close();
+	}
 
 }

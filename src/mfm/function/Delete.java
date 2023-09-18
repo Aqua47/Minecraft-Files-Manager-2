@@ -81,7 +81,7 @@ public class Delete {
 					.forEach(path -> {
 						if (notThisOne != path.toString()) {	//check if path is complet so it works
 							try {
-								Tools.print("Deleting: " + path);
+								Tools.printLog("Deleting: " + path);
 								Files.delete(path);
 							} catch (IOException e) {
 								e.printStackTrace();
