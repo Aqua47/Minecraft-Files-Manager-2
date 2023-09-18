@@ -8,7 +8,7 @@ import mfm.function.Indexes;
 import mfm.function.Logs;
 import mfm.function.Objects;
 
-public class Cmd { //test
+public class Cmd {
 	
 	private static final String version = "2.1";
 	
