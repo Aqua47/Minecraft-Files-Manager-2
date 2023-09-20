@@ -1,12 +1,9 @@
-package mfm.tools;
+package mfm.main;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-
-import mfm.run.Main;
-import mfm.run.MFM;
 
 public class Tools {
 	

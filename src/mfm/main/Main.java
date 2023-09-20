@@ -1,14 +1,8 @@
-package mfm.run;
+package mfm.main;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import mfm.functions.Backup;
-import mfm.functions.Delete;
-import mfm.functions.Indexes;
-import mfm.functions.Logs;
-import mfm.functions.Objects;
 
 public class Main {
 	

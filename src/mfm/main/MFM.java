@@ -1,4 +1,4 @@
-package mfm.run;
+package mfm.main;
 
 
 import java.awt.Container;
@@ -19,9 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import mfm.functions.*;
-import mfm.tools.*;
 
 
 public class MFM extends JFrame implements ActionListener{

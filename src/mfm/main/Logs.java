@@ -1,12 +1,9 @@
-package mfm.functions;
+package mfm.main;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
-import mfm.run.Main;
-import mfm.tools.Tools;
 
 public class Logs extends Function {
 	

@@ -1,4 +1,4 @@
-package mfm.functions;
+package mfm.main;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,9 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import mfm.run.Main;
-import mfm.tools.Tools;
 
 public class Objects extends Function {
 	

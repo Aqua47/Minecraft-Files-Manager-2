@@ -1,4 +1,4 @@
-package mfm.functions;
+package mfm.main;
 
 public abstract class Function {
 	

@@ -1,4 +1,4 @@
-package mfm.functions;
+package mfm.main;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,8 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import mfm.run.Main;
-import mfm.tools.*;
 
 public class Old {
 	public static void main(String min, String keep) throws IOException, InterruptedException {

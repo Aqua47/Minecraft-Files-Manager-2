@@ -1,13 +1,10 @@
-package mfm.functions;
+package mfm.main;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import mfm.run.Main;
-import mfm.tools.Tools;
 
 public class Indexes extends Function {
 	
