@@ -25,16 +25,16 @@ public class ModPack {
 	}
 	
 	public void saveModPack() {
-		new File("MFMLaucher"+Main.s+"ModPack"+Main.s+_name).mkdirs();
+		new File("MFMLaucher"+MFM.s+"ModPack"+MFM.s+_name).mkdirs();
 		//Files.move();
 	}
 	
 	public void loadModPack() throws IOException {
-		Files.move(Paths.get("MFMLaucher"+Main.s+"ModPack"+Main.s+_name), Paths.get(Main.min+Main.s+"mods")); //each files in folder
+		Files.move(Paths.get("MFMLaucher"+MFM.s+"ModPack"+MFM.s+_name), Paths.get(MFM.min+MFM.s+"mods")); //each files in folder
 	}
 	
 	public static void unloadModPack() throws IOException {
-		Delete.deleteAll(Main.min+Main.s+"mods", null);
+		Delete.deleteAll(MFM.min+MFM.s+"mods", null);
 	}
 	
 }

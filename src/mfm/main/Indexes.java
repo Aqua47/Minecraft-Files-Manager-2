@@ -6,15 +6,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import tools.Tools;
+
 public class Indexes extends Function {
+	
+	String _indexes;
 	
 	public Indexes(String ver) {
 		super(ver);
+		_indexes = MFM.min+MFM.s+"assets"+MFM.s+"indexes"+MFM.s;
 	}
 	
 	public void createIndexe() throws IOException, InterruptedException {
-		new File("MFM"+Main.s+"indexes"+Main.s).mkdirs();
-		String[] indexes = Tools.available(Main.min+Main.s+"assets"+Main.s+"indexes");
+		new File("MFM"+MFM.s+"indexes"+MFM.s).mkdirs();
+		String[] indexes = Tools.available(_indexes);
 		if (Tools.nothing(_ver)) {
 			_ver = Tools.scan();
 		}
@@ -31,12 +36,12 @@ public class Indexes extends Function {
 				_ver = (indexes[indexe]);
 			}
 			indexe++;
-			if (new File(Main.min+Main.s+"assets"+Main.s+"indexes"+Main.s+_ver).exists()) {
+			if (new File(_indexes+_ver).exists()) {
 				FileInputStream fin;
-				File out = new File("MFM"+Main.s+"indexes"+Main.s+_ver);
+				File out = new File("MFM"+MFM.s+"indexes"+MFM.s+_ver);
 				FileWriter fw;
 				try {
-					fin = new FileInputStream(Main.min+Main.s+"assets"+Main.s+"indexes"+Main.s+_ver);
+					fin = new FileInputStream(_indexes+_ver);
 					fw = new FileWriter(out);
 					PrintWriter pw = new PrintWriter(fw);
 					byte comma = 0;

@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 
+import tools.Tools;
+
 
 public class Delete extends Function {
 	
@@ -38,36 +40,36 @@ public class Delete extends Function {
 				deleteAll(mfms,null);
 			}
 			else if (com.matches("1|ind|indexe|indexes")) {	
-				Tools.available(mfms+Main.s+"indexes");
+				Tools.available(mfms+MFM.s+"indexes");
 				//String scan = Tools.scan();
 				if (scan.matches("a|all")) {
-					deleteAll(mfms+Main.s+"indexes",null);
+					deleteAll(mfms+MFM.s+"indexes",null);
 				} else {
-					deleteAll(mfms+Main.s+"indexes"+Main.s+scan,null);
+					deleteAll(mfms+MFM.s+"indexes"+MFM.s+scan,null);
 				}
 			}
 			else if (com.matches("2|obj|object|objects")) {
-				Tools.available(mfms+Main.s+"objects");
+				Tools.available(mfms+MFM.s+"objects");
 				//String scan = Tools.scan();
 				if (scan.matches("a|all")) {
-					deleteAll(mfms+Main.s+"objects",null);
+					deleteAll(mfms+MFM.s+"objects",null);
 				} else {
-					deleteAll(mfms+Main.s+"objects"+Main.s+scan,null);
+					deleteAll(mfms+MFM.s+"objects"+MFM.s+scan,null);
 				}
 			}
 			else if (com.matches("4|logs")) {
-				deleteAll(mfms+Main.s+"logs",null);
+				deleteAll(mfms+MFM.s+"logs",null);
 			}
 			else if (com.matches("6|backup")) {
-				Tools.available(mfms+Main.s+"backup");
+				Tools.available(mfms+MFM.s+"backup");
 				//String scan = Tools.scan();
 				if (scan.matches("a|all")) {
-					deleteAll(mfms+Main.s+"backup",null);
+					deleteAll(mfms+MFM.s+"backup",null);
 				} else {
 					if (!scan.endsWith(".7z")) {
 						scan = scan+".7z";
 					}
-					deleteFile(mfms+Main.s+"backup"+Main.s+scan);
+					deleteFile(mfms+MFM.s+"backup"+MFM.s+scan);
 				}
 			}
 			else {

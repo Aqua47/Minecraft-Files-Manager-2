@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import tools.Tools;
+
 public class Objects extends Function {
 	
 	public Objects(String ver) {
@@ -20,7 +22,7 @@ public class Objects extends Function {
 	public void createObject() throws IOException, InterruptedException {		
 		boolean all = false;
 		String fileOut = "";
-		String[] indexes = Tools.available(Main.min+Main.s+"assets"+Main.s+"indexes");
+		String[] indexes = Tools.available(MFM.min+MFM.s+"assets"+MFM.s+"indexes");
 		if (Tools.nothing(_ver)) {
 			_ver = Tools.scan();
 		}
@@ -45,8 +47,8 @@ public class Objects extends Function {
 					_ver = Tools.removeLast(verjson,5);
 				}
 				a++;
-				new File("MFM"+Main.s+"objects").mkdirs();
-				Path indexe = Paths.get("MFM"+Main.s+"indexes"+Main.s+verjson);
+				new File("MFM"+MFM.s+"objects").mkdirs();
+				Path indexe = Paths.get("MFM"+MFM.s+"indexes"+MFM.s+verjson);
 				Tools.print(_ver);
 				if (!Files.exists(indexe)) {
 					Indexes Indexes1;
@@ -61,7 +63,7 @@ public class Objects extends Function {
 					System.gc();
 				}
 				//Print.bar();
-				FileInputStream lec = new FileInputStream("MFM"+Main.s+"indexes"+Main.s+verjson); //TODO bug
+				FileInputStream lec = new FileInputStream("MFM"+MFM.s+"indexes"+MFM.s+verjson); //TODO bug
 				List<Character> ca = new ArrayList<Character> ();
 				for (short ca80 = 0; ca80 != 80; ca80++) {
 					ca.add(' ');
@@ -75,7 +77,7 @@ public class Objects extends Function {
 				byte getadd = -1;
 				byte h = 0;
 				//%
-				BufferedReader br = new BufferedReader(new FileReader("MFM"+Main.s+"indexes"+Main.s+verjson));
+				BufferedReader br = new BufferedReader(new FileReader("MFM"+MFM.s+"indexes"+MFM.s+verjson));
 				int allLine = 0;			
 				while (br.readLine() != null) {
 					allLine++;
@@ -103,14 +105,14 @@ public class Objects extends Function {
 						}
 						if (h==1) {
 							cc2 = cc;
-							File nfp = new File("MFM"+Main.s+"objects"+Main.s+_ver+Main.s+cc2);
+							File nfp = new File("MFM"+MFM.s+"objects"+MFM.s+_ver+MFM.s+cc2);
 							fileOut = "MFM/objects/"+_ver+"/"+cc2.substring(0, cc2.length() - nfp.getName().length())+nfp.getName();
 							File nf = new File(fileOut);
 							nf.mkdirs();
 						}
 						if (h==2) {
 							h = 0;
-							Path source = Paths.get(Main.min+Main.s+"assets"+Main.s+"objects"+Main.s+cc.substring(0,2)+Main.s+cc);
+							Path source = Paths.get(MFM.min+MFM.s+"assets"+MFM.s+"objects"+MFM.s+cc.substring(0,2)+MFM.s+cc);
 							Path dest = Paths.get(fileOut);
 							Files.deleteIfExists(dest);
 							Files.copy(source, dest);

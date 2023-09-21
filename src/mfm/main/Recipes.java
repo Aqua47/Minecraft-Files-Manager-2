@@ -10,7 +10,7 @@ public class Recipes {
 	
 	public Recipes(String ver) {
 		_ver = ver;
-		_path = Main.min+Main.s+"versions"+Main.s+ver+Main.s+ver+".jar"+Main.s+"data"+Main.s+"minecraft"+Main.s+"recipes";
+		_path = MFM.min+MFM.s+"versions"+MFM.s+ver+MFM.s+ver+".jar"+MFM.s+"data"+MFM.s+"minecraft"+MFM.s+"recipes";
 	}
 	
 	

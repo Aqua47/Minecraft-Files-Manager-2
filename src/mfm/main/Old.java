@@ -9,17 +9,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import tools.Tools;
+
 
 public class Old {
 	public static void main(String min, String keep) throws IOException, InterruptedException {
 		if (Tools.nothing(keep)) {
-			Tools.available(min+Main.s+"versions");
+			Tools.available(min+MFM.s+"versions");
 			Tools.print("Type the version you want to keep!");
 			keep = Tools.scan();
 		}	
 		if (keep != "0") { //do nothing if = 0
 			long startTime = System.nanoTime();
-			Runtime.getRuntime().exec("explorer.exe /select,"+min+Main.s+"versions"+Main.s+keep);
+			Runtime.getRuntime().exec("explorer.exe /select,"+min+MFM.s+"versions"+MFM.s+keep);
 			
 			//all
 			if (keep == "all") {
@@ -31,17 +33,17 @@ public class Old {
 				if (keep.lastIndexOf(".") >= 3) {
 					keep = Tools.removeLast(keep,2);
 				}
-				Path indexe = Paths.get("MFM"+Main.s+"indexes"+Main.s+keep+".json");
+				Path indexe = Paths.get("MFM"+MFM.s+"indexes"+MFM.s+keep+".json");
 				if (!Files.exists(indexe)) {
 					new Indexes(keep).createIndexe();
 				}
 				//Print.bar();
 				
 				//del indexes
-				Delete.deleteAll(min+Main.s+"assets"+Main.s+"indexes", keep);
+				Delete.deleteAll(min+MFM.s+"assets"+MFM.s+"indexes", keep);
 				//keep indexes folder
 				
-				BufferedReader br = new BufferedReader(new FileReader("MFM"+Main.s+"indexes"+Main.s+keep+".json"));
+				BufferedReader br = new BufferedReader(new FileReader("MFM"+MFM.s+"indexes"+MFM.s+keep+".json"));
 				String line = "0";
 				ArrayList<String> lines = new ArrayList<String>();
 				ArrayList<String> folders = new ArrayList<String>();
@@ -66,18 +68,18 @@ public class Old {
 				}
 				br.close();	
 				String[] pathnames = {"0"};
-				File file = new File(min+Main.s+"assets"+Main.s+"objects");
+				File file = new File(min+MFM.s+"assets"+MFM.s+"objects");
 				pathnames = file.list();
 				long bytes = 0;
 				for (String pathname : pathnames) {		
 					String[] pathnames2 = {"0"};
-					File file2 = new File(min+Main.s+"assets"+Main.s+"objects"+Main.s+pathname);
+					File file2 = new File(min+MFM.s+"assets"+MFM.s+"objects"+MFM.s+pathname);
 					pathnames2 = file2.list();
 					for (String pathname2 : pathnames2) {
-						File path2 = new File(file2+Main.s+pathname2);
+						File path2 = new File(file2+MFM.s+pathname2);
 						int a1 = lines.indexOf(pathname2);
 						if (a1 == -1) {
-							Path path = Paths.get(file2+Main.s+pathname2);
+							Path path = Paths.get(file2+MFM.s+pathname2);
 							try {
 								bytes += Files.size(path);
 							} catch (IOException e) {

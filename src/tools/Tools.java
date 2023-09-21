@@ -1,9 +1,14 @@
-package mfm.main;
+package tools;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import mfm.main.Jf;
+import mfm.main.MFM;
 
 public class Tools {
 	
@@ -32,6 +37,20 @@ public class Tools {
 		return false;
 	}
 	
+	//file
+	
+	public static void write(String location, String txt) throws IOException {
+		FileWriter servWriter = new FileWriter(location);
+		servWriter.write(txt);
+		servWriter.close();
+	}
+	
+	public static String readLine(String location) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(new File(location)));
+		return br.readLine();
+	}
+	
+	
 	//available
 	
 	public static String[] available (String in) {
@@ -55,7 +74,7 @@ public class Tools {
 	public static void run7z(String in) throws InterruptedException, IOException {
 		try {
 			Process gz;
-			if (Main.linux) {
+			if (MFM.linux) {
 				gz = Runtime.getRuntime().exec(in);
 			} else {
 				gz = Runtime.getRuntime().exec("cmd /C start /wait "+in);
@@ -72,7 +91,7 @@ public class Tools {
 	
 	public static void print(String s) throws IOException {
 		System.out.println(s);
-		MFM.print.append(s+"\n");
+		Jf.print.append(s+"\n");
 		printLog(s);
 	}
 	
@@ -86,7 +105,7 @@ public class Tools {
 	//MFMlogs
 	public static void printLog(String s) throws IOException {
 		new File("MFMLogs\\").mkdirs();
-		FileWriter fw = new FileWriter("MFMLogs\\"+Main.date+".txt",true);
+		FileWriter fw = new FileWriter("MFMLogs\\"+MFM.date+".txt",true);
 		fw.append(s+"\n");
 		fw.close();
 	}
